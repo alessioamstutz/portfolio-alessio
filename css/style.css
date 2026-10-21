@@ -336,13 +336,13 @@ html:has(.window[open]) { overflow: hidden; }
 	align-items: center;
 	justify-content: space-between;
 	gap: 1rem;
-	padding: 0.4rem 0.5rem 0.4rem 1rem;
+	padding: 0.5rem 0.6rem 0.5rem 1rem;
 	background: var(--blue);
 	color: #fff;
 	font-weight: 600;
 	font-size: 0.95rem;
 }
-.window-file { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.window-file { font-family: var(--font-heading); font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
 .window-close {
 	flex: none;
 	width: 2.25rem;
@@ -379,7 +379,6 @@ html:has(.window[open]) { overflow: hidden; }
 /* contain: das ganze Bild bleibt sichtbar, nichts wird abgeschnitten */
 .window-media img { display: block; max-width: 100%; max-height: calc(100vh - 9rem); object-fit: contain; border-radius: 6px; }
 .window-text { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 1.75rem; }
-.window-text h3 { font-size: clamp(1.6rem, 3vw, 2.25rem); letter-spacing: -0.02em; }
 .window-desc { font-size: 1.1rem; }
 .window-desc[hidden], .window-link[hidden] { display: none; }
 .window-link {

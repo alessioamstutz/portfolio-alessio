@@ -128,7 +128,7 @@
 	<!-- ============ Projekt-Fenster (wird von js/main.js gefüllt und geöffnet) ============ -->
 	<dialog id="project-dialog" class="window" aria-labelledby="pd-title">
 		<div class="window-bar">
-			<span class="window-file">Projekt</span>
+			<span id="pd-title" class="window-file"></span>
 			<button id="pd-close" class="window-close" type="button" aria-label="Fenster schliessen">&times;</button>
 		</div>
 		<div class="window-body">
@@ -136,7 +136,6 @@
 				<img id="pd-img" alt="">
 			</div>
 			<div class="window-text">
-				<h3 id="pd-title"></h3>
 				<p id="pd-category" class="tag"></p>
 				<p id="pd-desc" class="window-desc"></p>
 				<a id="pd-link" class="window-link" target="_blank" rel="noopener">Zum Projekt</a>
