@@ -180,8 +180,9 @@ a { color: inherit; }
 .section-hero { padding: 0; }
 .hero-grid {
 	display: grid;
-	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-	min-height: clamp(26rem, 66vh, 40rem);
+	grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+	/* füllt den Bildschirm: Höhe abzüglich Kopfzeile und Laufband */
+	min-height: max(30rem, calc(100svh - 9rem));
 }
 .hero-text {
 	display: flex;
@@ -192,16 +193,16 @@ a { color: inherit; }
 	color: #fff;
 }
 .hero-name {
-	font-size: clamp(2.6rem, 5.6vw, 5.25rem);
+	font-size: clamp(2.6rem, 5.7vw, 5.75rem);
 	line-height: 0.95;
 	letter-spacing: -0.035em;
 }
 .hero-sub {
-	max-width: 24rem;
-	margin-top: 1.75rem;
+	max-width: 26rem;
+	margin-top: 2rem;
 	padding-left: 1rem;
 	border-left: 6px solid #fff;
-	font-size: 1.3rem;
+	font-size: 1.45rem;
 	line-height: 1.35;
 	font-weight: 500;
 }
@@ -215,6 +216,7 @@ a { color: inherit; }
 }
 @media (max-width: 800px) {
 	.hero-grid { grid-template-columns: 1fr; min-height: 0; }
+	.hero-text { min-height: 55svh; }
 	.hero-text { padding: 2.5rem var(--page-pad); }
 	.hero-name { font-size: 12.5vw; }
 	.hero-portrait { height: 80vw; min-height: 0; }
@@ -492,6 +494,8 @@ html:has(.window[open]) { overflow: hidden; }
 
 /* ---------- 8 Fusszeile ---------- */
 .site-footer { background: var(--ink); color: var(--paper); }
+.site-footer a { font-weight: 600; text-underline-offset: 0.2em; }
+.site-footer a:hover { color: var(--red); }
 .footer-inner {
 	display: flex;
 	flex-wrap: wrap;
