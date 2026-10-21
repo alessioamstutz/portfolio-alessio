@@ -10,7 +10,7 @@ Ich arbeite als Radiomoderator bei SRF Virus und SRF Kids, mache mit Julian den 
 
 Dafür baue ich diese Seite. Sie soll in wenigen Sekunden zeigen, wer ich bin und was ich mache, und mich direkt erreichbar machen.
 
-Mir war wichtig, dass die Seite **nicht wie eine Vorlage aussieht**. Viele Portfolios sind dunkel, überladen oder sehen alle gleich aus. Meine Seite ist bewusst schlicht, hell und jung, mit wenigen starken Farbflächen in Blau, Pink und Orange. Mein Gesicht ist gleich oben zu sehen, weil mich die Leute zuerst als Person kennenlernen sollen.
+Mir war wichtig, dass die Seite **nicht wie eine Vorlage aussieht**. Viele Portfolios sind dunkel, überladen oder sehen alle gleich aus. Meine Seite ist bewusst schlicht, hell und jung, mit wenigen starken Farbflächen in Blau und Rot. Mein Gesicht ist gleich oben zu sehen, weil mich die Leute zuerst als Person kennenlernen sollen.
 
 **Was Besucher:innen auf der Seite machen können:**
 
