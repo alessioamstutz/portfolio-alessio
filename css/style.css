@@ -252,6 +252,10 @@ a { color: inherit; }
 
 .tile {
 	position: relative;
+	width: 100%;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -266,12 +270,21 @@ a { color: inherit; }
 .tile-pink { background: var(--red); }
 .tile-orange { background: var(--red); }
 .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.tile p { font-weight: 600; opacity: 0.9; }
+.tile span { font-weight: 600; opacity: 0.9; }
 .project:hover .tile { transform: translateY(-5px); }
 
 .project h3 { margin: 1rem 0 0.15rem; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
-.project h3 a { text-decoration: none; }
-.project h3 a:hover { color: var(--blue); }
+.project-title {
+	padding: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	letter-spacing: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+.project-title:hover { color: var(--blue); }
 .tag { font-size: 1rem; color: var(--grey); }
 
 .more-btn {
@@ -296,6 +309,95 @@ a { color: inherit; }
 
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+/* ---------- 5b Projekt-Fenster ---------- */
+.window {
+	width: min(60rem, calc(100vw - 2rem));
+	max-height: calc(100vh - 2rem);
+	margin: auto;
+	padding: 0;
+	border: 3px solid var(--ink);
+	border-radius: 14px;
+	background: var(--paper);
+	color: var(--ink);
+	box-shadow: 10px 10px 0 var(--ink);
+	overflow: hidden;
+}
+.window[open] { display: flex; flex-direction: column; animation: window-in 0.18s ease-out; }
+.window::backdrop { background: rgba(11, 11, 46, 0.72); }
+@keyframes window-in {
+	from { opacity: 0; transform: scale(0.96) translateY(8px); }
+}
+@media (prefers-reduced-motion: reduce) { .window[open] { animation: none; } }
+html:has(.window[open]) { overflow: hidden; }
+
+.window-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 0.4rem 0.5rem 0.4rem 1rem;
+	background: var(--blue);
+	color: #fff;
+	font-weight: 600;
+	font-size: 0.95rem;
+}
+.window-file { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.window-close {
+	flex: none;
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0;
+	border: 2px solid #fff;
+	border-radius: 8px;
+	background: transparent;
+	color: #fff;
+	font-size: 1.6rem;
+	line-height: 1;
+	cursor: pointer;
+}
+.window-close:hover { background: var(--red); border-color: var(--red); color: var(--ink); }
+.window :focus-visible { outline-color: var(--red); }
+.window-bar :focus-visible { outline-color: #fff; }
+
+.window-body {
+	display: grid;
+	grid-template-columns: 1.3fr 1fr;
+	min-height: 0;
+	overflow: auto;
+}
+.window-media {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.25rem;
+	background: var(--blue);
+}
+.window-media[hidden] { display: none; }
+.window-media.tile-blue { background: var(--blue); }
+.window-media.tile-pink, .window-media.tile-orange { background: var(--red); }
+/* contain: das ganze Bild bleibt sichtbar, nichts wird abgeschnitten */
+.window-media img { display: block; max-width: 100%; max-height: calc(100vh - 9rem); object-fit: contain; border-radius: 6px; }
+.window-text { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 1.75rem; }
+.window-text h3 { font-size: clamp(1.6rem, 3vw, 2.25rem); letter-spacing: -0.02em; }
+.window-desc { font-size: 1.1rem; }
+.window-desc[hidden], .window-link[hidden] { display: none; }
+.window-link {
+	margin-top: auto;
+	padding: 0.9rem 1.5rem;
+	border-radius: 10px;
+	background: var(--ink);
+	color: var(--paper);
+	font-family: var(--font-heading);
+	font-weight: 700;
+	text-decoration: none;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+.window-link:hover { background: var(--red); color: var(--ink); }
+@media (max-width: 700px) {
+	.window-body { grid-template-columns: 1fr; }
+	.window-media img { max-height: 45vh; }
+}
 
 /* ---------- 6 Über mich (rote Fläche) ---------- */
 .section-ueber { background: var(--red); }

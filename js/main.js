@@ -9,6 +9,7 @@ const VISIBLE_COUNT = 3; // so viele Projekte sind sofort sichtbar, der Rest hin
 document.addEventListener('DOMContentLoaded', () => {
 	initMenu();
 	initMoreButton();
+	initProjectDialog();
 	loadProjects();
 	initContactForm();
 	initScrollSpy();
@@ -78,42 +79,97 @@ function statusMessage(text) {
 }
 
 /* Baut eine Projekt-Kachel. textContent statt innerHTML: Texte aus der Datenbank
-   werden nie als HTML ausgeführt (Schutz vor Code-Einschleusung). */
+   werden nie als HTML ausgeführt (Schutz vor Code-Einschleusung).
+   Klick auf Bild oder Titel öffnet das Projekt-Fenster. */
 function createProjectCard(project) {
-	const colors = ['blue', 'pink', 'orange'];
-	const color = colors.includes(project.color) ? project.color : 'blue';
+	const color = projectColor(project);
 
 	const article = document.createElement('article');
 	article.className = 'project';
 
-	const tile = document.createElement('div');
+	const tile = document.createElement('button');
+	tile.type = 'button';
 	tile.className = 'tile tile-' + color;
+	tile.setAttribute('aria-label', project.title + ': Details öffnen');
 	if (project.image) {
 		const img = document.createElement('img');
 		img.src = project.image;
-		img.alt = project.image_alt || project.title;
+		img.alt = '';
 		img.loading = 'lazy';
 		tile.append(img);
 	} else {
-		const note = document.createElement('p');
+		const note = document.createElement('span');
 		note.textContent = 'Bild folgt';
 		tile.append(note);
 	}
 
 	const heading = document.createElement('h3');
-	const link = document.createElement('a');
-	// nur normale Link-Ziele erlauben (kein "javascript:")
-	const safe = /^(https?:\/\/|\/|#|[a-z0-9_-]+\.(html|php))/i.test(project.link || '');
-	link.href = safe ? project.link : '#';
-	link.textContent = project.title;
-	heading.append(link);
+	const titleBtn = document.createElement('button');
+	titleBtn.type = 'button';
+	titleBtn.className = 'project-title';
+	titleBtn.textContent = project.title;
+	heading.append(titleBtn);
 
 	const tag = document.createElement('p');
 	tag.className = 'tag';
 	tag.textContent = project.category;
 
+	[tile, titleBtn].forEach((el) => el.addEventListener('click', () => openProject(project, tile)));
+
 	article.append(tile, heading, tag);
 	return article;
+}
+
+function projectColor(project) {
+	return ['blue', 'pink', 'orange'].includes(project.color) ? project.color : 'blue';
+}
+
+/* nur normale Link-Ziele erlauben (kein "javascript:") */
+function safeLink(url) {
+	return /^(https?:\/\/|\/|#|[a-z0-9_-]+\.(html|php))/i.test(url || '') ? url : '';
+}
+
+
+/* ---------- 2b Projekt-Fenster ----------
+   Das <dialog>-Element liefert alles Wichtige selbst mit: Es legt sich über die Seite,
+   fängt den Tastatur-Fokus ein und schliesst mit der Esc-Taste. */
+function openProject(project, opener) {
+	const dialog = document.querySelector('#project-dialog');
+	const media = dialog.querySelector('#pd-media');
+	const img = dialog.querySelector('#pd-img');
+	const desc = dialog.querySelector('#pd-desc');
+	const link = dialog.querySelector('#pd-link');
+
+	dialog.querySelector('#pd-title').textContent = project.title;
+	dialog.querySelector('#pd-category').textContent = project.category;
+	dialog.querySelector('#pd-file').textContent = project.image ? project.image.split('/').pop() : 'projekt';
+
+	media.className = 'window-media tile-' + projectColor(project);
+	media.hidden = !project.image;
+	img.src = project.image || '';
+	img.alt = project.image_alt || project.title;
+
+	desc.textContent = project.description || '';
+	desc.hidden = !project.description;
+
+	const href = safeLink(project.link);
+	link.hidden = !href;
+	if (href) link.href = href;
+
+	dialog.returnFocusTo = opener;
+	dialog.showModal();
+}
+
+function initProjectDialog() {
+	const dialog = document.querySelector('#project-dialog');
+	if (!dialog || typeof dialog.showModal !== 'function') return;
+
+	dialog.querySelector('#pd-close').addEventListener('click', () => dialog.close());
+	// Klick neben das Fenster (auf den abgedunkelten Hintergrund) schliesst es ebenfalls
+	dialog.addEventListener('click', (event) => {
+		if (event.target === dialog) dialog.close();
+	});
+	dialog.addEventListener('close', () => dialog.returnFocusTo?.focus());
 }
 
 

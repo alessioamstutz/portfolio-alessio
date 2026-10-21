@@ -11,10 +11,11 @@ CREATE TABLE projects (
 	id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	title       VARCHAR(120) NOT NULL,                              -- Titel
 	category    VARCHAR(80)  NOT NULL,                              -- Kategorie
+	description TEXT NULL,                                          -- Kurztext für das Projekt-Fenster
 	color       ENUM('blue','pink','orange') NOT NULL DEFAULT 'blue', -- Akzentfarbe
 	image       VARCHAR(255) NULL,                                  -- Vorschaubild, z. B. img/amygdala.jpg
 	image_alt   VARCHAR(255) NULL,                                  -- Bildbeschreibung für Screenreader
-	link        VARCHAR(255) NULL,                                  -- Ziel beim Klick auf den Titel
+	link        VARCHAR(255) NULL,                                  -- Ziel des Buttons «Zum Projekt» im Fenster
 	sort_order  INT NOT NULL DEFAULT 0,                             -- kleinere Zahl = weiter vorne
 	is_visible  TINYINT(1) NOT NULL DEFAULT 1                       -- 0 = versteckt
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
