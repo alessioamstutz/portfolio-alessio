@@ -3,7 +3,7 @@
    Aufbau: 1 Grundlagen · 2 Kopfzeile · 3 Abschnitte · 4 Hero
            5 Projekte · 6 Über mich · 7 Kontakt · 8 Fusszeile
    Idee: Jeder Abschnitt hat seine eigene Farbfläche, so wie eine Radiosendung
-   ihr eigenes Jingle hat. Papier (Start, Projekte), Pink (Laufband), Rot (Über mich),
+   ihr eigenes Jingle hat. Papier (Start, Projekte), Rot (Laufband und Über mich),
    Blau (Kontakt), Tinte (Fusszeile).
    ========================================================= */
 
@@ -212,7 +212,7 @@ a { color: inherit; }
 /* ---------- 4b Laufband (pink) ---------- */
 .ticker {
 	overflow: hidden;
-	background: var(--pink);
+	background: var(--red);
 	color: var(--ink);
 	font-family: var(--font-heading);
 	font-weight: 800;
@@ -369,7 +369,7 @@ a { color: inherit; }
 	cursor: pointer;
 	transition: background 0.2s ease, color 0.2s ease;
 }
-.btn:hover { background: var(--pink); color: #fff; }
+.btn:hover { background: var(--red); color: var(--ink); }
 .btn:disabled { opacity: 0.6; cursor: wait; }
 
 .buttons { display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; }
@@ -381,7 +381,7 @@ a { color: inherit; }
 	text-decoration-thickness: 3px;
 	text-underline-offset: 0.2em;
 }
-.text-link:hover { text-decoration-color: var(--pink); }
+.text-link:hover { text-decoration-color: var(--red); }
 
 /* ---------- 8 Fusszeile ---------- */
 .site-footer { background: var(--ink); color: var(--paper); }
