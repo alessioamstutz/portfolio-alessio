@@ -1,86 +1,75 @@
 # Portfolio Alessio Amstutz
 
-Persönliche Portfolio-Website von Alessio Amstutz (Moderator, Podcaster, Multimedia Producer). Projekt im Modul **Interaktive Medien 5** (HS26, FH Graubünden, Bachelor Multimedia Production).
+Meine persönliche Portfolio-Website. Sie entsteht im Modul **Interaktive Medien 5** (Herbstsemester 2026, Bachelor Multimedia Production, FH Graubünden).
 
-**Live:** https://portfolio.im5.alessioamstutz.ch
+**Online:** https://portfolio.im5.alessioamstutz.ch
 
 ## Projektidee
 
-Ich wollte eine Portfolio-Seite, die nicht nach Vorlage aussieht: schlicht, jung und mit klaren Farbflächen. Die Seite stellt mich und meine Arbeit vor (SRF Virus, SRF Kids, Amygdala, Videoprojekte) und führt Besucher:innen mit einer Navigation direkt zu den Projekten, zum Profil und zum Kontakt.
+Ich arbeite als Radiomoderator bei SRF Virus und SRF Kids, mache mit Julian den YouTube-Kanal Amygdala und studiere Multimedia Production. Meine Arbeit ist verteilt: ein Teil läuft im Radio, ein Teil auf YouTube, ein Teil in Studienprojekten. Wer mich buchen, anfragen oder einfach kennenlernen will, findet nirgends alles an einem Ort.
 
-Die Projekte stehen nicht fest im HTML, sondern in einer MySQL-Datenbank. So kann ich neue Projekte in phpMyAdmin eintragen, ohne den Code anzufassen.
+Dafür baue ich diese Seite. Sie soll in wenigen Sekunden zeigen, wer ich bin und was ich mache, und mich direkt erreichbar machen.
 
-## Funktionen
+Mir war wichtig, dass die Seite **nicht wie eine Vorlage aussieht**. Viele Portfolios sind dunkel, überladen oder sehen alle gleich aus. Meine Seite ist bewusst schlicht, hell und jung, mit wenigen starken Farbflächen in Blau, Pink und Orange. Mein Gesicht ist gleich oben zu sehen, weil mich die Leute zuerst als Person kennenlernen sollen.
 
-- Einseitige Website mit fester Navigation und Scroll zu den Abschnitten (aktiver Menüpunkt wird hervorgehoben)
-- Projektkacheln werden per `fetch()` aus der Datenbank geladen, drei sind sofort sichtbar, der Rest erscheint hinter «Mehr Projekte»
-- Kontaktformular: Nachricht wird in der Datenbank gespeichert und per E-Mail an mich geschickt
-- Responsive Layout (Desktop und Mobile), mobiles Menü
-- Barrierefreiheit: Skip-Link, `aria`-Attribute, Alt-Texte aus der Datenbank
+**Was Besucher:innen auf der Seite machen können:**
+
+- Oben in der Navigation anklicken, wohin sie wollen. Die Seite scrollt dann zu «Projekte», «Über mich» oder «Kontakt».
+- Meine Projekte als Kacheln ansehen. Drei sind sofort sichtbar, mit «Mehr Projekte» erscheinen die weiteren.
+- Mir über das Kontaktformular schreiben. Die Nachricht kommt direkt in mein Postfach.
+- Mich über LinkedIn und Instagram finden.
+
+**Warum die Projekte in einer Datenbank liegen:**
+Meine Projekte ändern sich laufend. Damit ich nicht jedes Mal den Code anpassen muss, stehen Titel, Kategorie, Bild und Farbe in einer MySQL-Datenbank. Ich füge ein Projekt in phpMyAdmin hinzu, und es erscheint automatisch auf der Seite.
 
 ## Technologien
 
-| Bereich | Umsetzung |
-| --- | --- |
-| Frontend | HTML5, CSS (Custom Properties, Grid, Flexbox), JavaScript (`fetch`, `IntersectionObserver`) |
-| Backend | PHP 8 mit PDO (Prepared Statements), JSON-Schnittstelle |
-| Datenbank | MySQL / MariaDB, `utf8mb4` |
-| Schriften | Syne und DM Sans, lokal eingebunden (`woff2`) |
-| Hosting | Infomaniak (Webhosting, SFTP-Upload) |
+- **HTML, CSS, JavaScript** für Aufbau, Gestaltung und Interaktion (mobiles Menü, Scroll-Navigation, Nachladen der Projekte)
+- **PHP und MySQL** für die Projekte und das Kontaktformular
+- **Infomaniak** als Hosting
 
-## Aufbau
+## Ordnerstruktur
 
 ```
-index.html          Seite
-css/style.css       Gestaltung
-js/main.js          Menü, Projekte laden, Formular, Scrollspy
-api/projects.php    liefert die Projekte als JSON
-api/contact.php     speichert Nachricht und sendet Mail
-api/db.php          Datenbankverbindung (PDO)
+index.html               die Seite
+css/style.css            Gestaltung
+js/main.js               Menü, Projekte laden, Formular
+api/projects.php         liefert die Projekte aus der Datenbank
+api/contact.php          speichert die Nachricht und schickt mir eine Mail
+api/db.php               Verbindung zur Datenbank
 api/config.example.php   Vorlage für die Zugangsdaten
-sql/schema.sql      Tabellen `projects` und `messages` mit Beispieldaten
-img/, fonts/        Bilder und Schriften
+sql/schema.sql           Datenbank-Tabellen mit Beispielprojekten
+img/, fonts/             Bilder und Schriften
 ```
 
-## Setup (lokal)
+## Setup
 
-1. Repository klonen.
-2. In MAMP oder XAMPP in den Webordner (`htdocs`) legen.
-3. In phpMyAdmin eine Datenbank anlegen und `sql/schema.sql` importieren.
-4. `api/config.example.php` zu `api/config.php` kopieren und die eigenen Zugangsdaten eintragen (Host, Port, Datenbankname, Benutzer, Passwort).
-5. Im Browser öffnen, zum Beispiel `http://localhost:8888/portfolio-alessio/`.
+1. Repository herunterladen und in den Webordner von MAMP oder XAMPP legen.
+2. In phpMyAdmin eine Datenbank erstellen und `sql/schema.sql` importieren.
+3. `api/config.example.php` kopieren, die Kopie `api/config.php` nennen und die eigenen Datenbank-Zugangsdaten eintragen.
+4. Im Browser öffnen, zum Beispiel `http://localhost:8888/portfolio-alessio/`.
 
-Die Datei `api/config.php` ist in der `.gitignore` und wird nicht hochgeladen. Die `.htaccess` sperrt zusätzlich `config.php`, `.sql`- und `.md`-Dateien auf dem Server.
-
-## Sicherheit
-
-- Alle Datenbankabfragen laufen über PDO mit Prepared Statements
-- Formular: serverseitige Validierung und ein Honeypot-Feld gegen Spam
-- Ausgabe im Frontend mit `textContent` statt `innerHTML`
-- Zugangsdaten nur in `config.php`, nicht im Repository
+Die `config.php` mit dem Passwort ist nicht im Repository (`.gitignore`).
 
 ## Screenshots
 
-_Hier kommen Screenshots der Startseite, der Projektkacheln und der mobilen Ansicht hin (Ordner `docs/`)._
+_Folgen._
 
 ## Learnings
 
-- Lokale Entwicklung (MAMP) und Hosting unterscheiden sich: andere Datenbank-Hosts, Ports und Benutzer. Darum eine eigene `config.php` pro Umgebung.
-- Dateinamen auf dem Server sind case-sensitive. Umlaute und Leerzeichen in Bildnamen führen schnell zu kaputten Bildern.
-- Umlaute in der Datenbank brauchen durchgehend `utf8mb4` und `SET NAMES utf8mb4`.
-- Die Trennung von Daten (Datenbank) und Darstellung (HTML/CSS/JS) macht Änderungen einfach.
+- Lokal (MAMP) und auf dem Hosting sind Datenbank-Host, Port und Benutzer verschieden. Deshalb hat jede Umgebung ihre eigene `config.php`.
+- Auf dem Server ist die Schreibweise von Dateinamen wichtig. Umlaute und Leerzeichen in Bildnamen machen Bilder kaputt.
+- Für Umlaute in der Datenbank braucht es überall `utf8mb4`.
 
 ## Schwierigkeiten
 
-- Datenbankverbindung lokal und auf dem Hosting (falscher Name, Host, Port)
-- Bilder: fehlende Dateiendungen, falsche Pfade, Umlaute im Dateinamen
-- Mailversand funktioniert lokal nicht (MAMP hat keinen Mailserver), darum Test erst auf dem Hosting
-- Upload per FTP: Dateien im falschen Ordner, Versteckte Dateien wie `.htaccess`
+- Die Datenbankverbindung funktionierte lokal, aber nicht auf dem Hosting (falsche Zugangsdaten).
+- Bilder wurden nicht angezeigt (falsche Pfade, fehlende Endungen, Umlaute im Namen).
+- E-Mails lassen sich lokal nicht testen, weil MAMP keinen Mailserver hat.
 
 ## Ressourcen
 
 - [MDN Web Docs](https://developer.mozilla.org/de/)
-- [PHP-Handbuch: PDO](https://www.php.net/manual/de/book.pdo.php)
-- [Infomaniak Support](https://www.infomaniak.com/de/support)
-- Schriften: [Syne](https://fonts.google.com/specimen/Syne) und [DM Sans](https://fonts.google.com/specimen/DM+Sans) (SIL Open Font License, Lizenzen im Ordner `fonts/`)
-- Entwurf zuerst in Figma, Unterstützung beim Code durch Claude (Anthropic)
+- [PHP-Handbuch zu PDO](https://www.php.net/manual/de/book.pdo.php)
+- Schriften [Syne](https://fonts.google.com/specimen/Syne) und [DM Sans](https://fonts.google.com/specimen/DM+Sans) (Lizenzen im Ordner `fonts/`)
+- Entwurf in Figma, Hilfe beim Programmieren durch Claude (Anthropic)
