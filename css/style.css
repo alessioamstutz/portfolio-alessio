@@ -26,9 +26,9 @@
 :root {
 	/* Farben (Papier entspricht dem Hintergrund des Porträtfotos) */
 	--paper: #F5F5F5;
-	--ink: #0B0B2E;
-	--blue: #3030FF;
-	--red: #FF3B30;
+	--ink: #10061F;
+	--blue: #6B2CFF;
+	--red: #C8FF2E;
 	--grey: #5C5C70;
 
 	/* Schriften */
