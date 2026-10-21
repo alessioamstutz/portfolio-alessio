@@ -33,7 +33,7 @@ function send_notification(string $name, string $email, string $message): void
 		$mail->CharSet    = 'UTF-8';
 		$mail->Timeout    = 10;
 
-		$mail->setFrom(MAIL_USER, 'Portfolio');
+		$mail->setFrom(defined('MAIL_FROM') ? MAIL_FROM : MAIL_USER, 'Portfolio');
 		$mail->addAddress(MAIL_TO);
 		$mail->addReplyTo($email, $name);
 		$mail->Subject = 'Neue Nachricht vom Portfolio von ' . str_replace(["\r", "\n"], ' ', $name);

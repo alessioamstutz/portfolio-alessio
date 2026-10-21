@@ -15,6 +15,7 @@ define('DB_PASS', 'dein_passwort');
 // E-Mail-Versand per SMTP (Postfach beim Hoster)
 define('MAIL_HOST', 'mail.infomaniak.com');
 define('MAIL_PORT', 465);
-define('MAIL_USER', 'kontakt@deine-domain.ch');
+define('MAIL_USER', 'login-des-postfachs');   // Benutzername für die SMTP-Anmeldung
+define('MAIL_FROM', 'kontakt@deine-domain.ch'); // Absender (Adresse deiner Domain)
 define('MAIL_PASS', 'passwort_des_postfachs');
 define('MAIL_TO',   'deine-adresse@beispiel.ch');
