@@ -179,7 +179,6 @@ a { color: inherit; }
    Das Foto hat denselben hellen Hintergrund wie die Seite, darum wirkt die rechte Hälfte wie ein Stück Papier. */
 .section-hero { padding: 0; }
 .hero-grid {
-	position: relative;
 	display: grid;
 	grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
 	/* füllt den Bildschirm: Höhe abzüglich Kopfzeile und Laufband */
@@ -225,31 +224,8 @@ a { color: inherit; }
 	.hero-portrait { height: 80vw; min-height: 0; }
 }
 
-/* Aufkleber an der Kante zwischen blauer Fläche und Foto */
-.sticker {
-	position: absolute;
-	left: calc(54.5% - 6.75rem);
-	bottom: 4.5rem;
-	z-index: 3;
-	width: 13.5rem;
-	height: 13.5rem;
-	filter: drop-shadow(5px 6px 0 var(--ink));
-}
-.sticker svg { display: block; width: 100%; height: 100%; }
-.sticker-ring { transform-origin: 100px 100px; animation: spin 22s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .sticker-ring { animation: none; } }
-@media (max-width: 800px) {
-	.sticker { left: auto; right: 1rem; top: calc(55svh - 4rem); bottom: auto; width: 8.5rem; height: 8.5rem; }
-}
-
 /* ---------- 4b Laufband (rot) ---------- */
 .ticker {
-	position: relative;
-	z-index: 2;
-	width: 106%;
-	margin: -1.2rem 0 -0.5rem -3%;
-	transform: rotate(-1.6deg);
 	overflow: hidden;
 	background: var(--red);
 	color: var(--ink);
@@ -281,7 +257,6 @@ a { color: inherit; }
 }
 
 /* ---------- 5 Projekte ---------- */
-main { overflow-x: clip; } /* das schräge Laufband soll keine Querscroll-Leiste erzeugen */
 .grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -305,15 +280,11 @@ main { overflow-x: clip; } /* das schräge Laufband soll keine Querscroll-Leiste
 	border-radius: var(--radius);
 	background: var(--tile-bg);
 	color: var(--ink);
-	transition: transform 0.25s ease, rotate 0.25s ease;
+	transition: transform 0.25s ease;
 }
 .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .tile span { font-weight: 600; opacity: 0.9; }
-.project:nth-child(3n + 1) .tile { rotate: -2deg; }
-.project:nth-child(3n + 2) .tile { rotate: 1.4deg; }
-.project:nth-child(3n) .tile { rotate: -1deg; }
-.project:hover .tile { transform: translateY(-6px); rotate: 0deg; }
-@media (prefers-reduced-motion: reduce) { .tile { rotate: 0deg !important; } }
+.project:hover .tile { transform: translateY(-5px); }
 
 .project h3 { margin: 1rem 0 0.15rem; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
 .project-title {
@@ -458,20 +429,7 @@ html:has(.window[open]) { overflow: hidden; }
 @media (max-width: 800px) { .ueber-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 
 /* ---------- 7 Kontakt (blaue Fläche) ---------- */
-.section-kontakt { position: relative; overflow: hidden; background: var(--blue); color: #fff; }
-.section-kontakt > * { position: relative; z-index: 1; }
-/* grosser roter Kreis, der aus der Ecke ragt */
-.section-kontakt::before {
-	content: "";
-	position: absolute;
-	right: -9vw;
-	bottom: -12vw;
-	width: min(48vw, 44rem);
-	aspect-ratio: 1;
-	border-radius: 50%;
-	background: var(--red);
-}
-@media (max-width: 700px) { .section-kontakt::before { display: none; } }
+.section-kontakt { background: var(--blue); color: #fff; }
 .section-kontakt :focus-visible { outline-color: #fff; }
 
 .contact-title {
