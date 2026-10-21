@@ -143,7 +143,6 @@ function openProject(project, opener) {
 	dialog.querySelector('#pd-title').textContent = project.title;
 	dialog.querySelector('#pd-category').textContent = project.category;
 
-	media.className = 'window-media tile-' + projectColor(project);
 	media.hidden = !project.image;
 	img.src = project.image || '';
 	img.alt = project.image_alt || project.title;
