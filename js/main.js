@@ -124,9 +124,13 @@ function projectColor(project) {
 	return ['blue', 'pink', 'orange'].includes(project.color) ? project.color : 'blue';
 }
 
-/* nur normale Link-Ziele erlauben (kein "javascript:") */
+/* nur normale Link-Ziele erlauben (kein "javascript:").
+   Adressen ohne "https://", z. B. "www.srf.ch/virus", werden ergänzt. */
 function safeLink(url) {
-	return /^(https?:\/\/|\/|#|[a-z0-9_-]+\.(html|php))/i.test(url || '') ? url : '';
+	const value = (url || '').trim();
+	if (/^(https?:\/\/|\/|#|[a-z0-9_-]+\.(html|php))/i.test(value)) return value;
+	if (/^[a-z0-9-]+(\.[a-z0-9-]+)+(\/|$)/i.test(value)) return 'https://' + value;
+	return '';
 }
 
 
