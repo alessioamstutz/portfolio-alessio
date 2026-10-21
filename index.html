@@ -20,7 +20,7 @@
 	<!-- ============ Kopfzeile ============ -->
 	<header class="site-header">
 		<div class="header-inner">
-			<a class="logo" href="#start">A. Amstutz</a>
+			<a class="logo" href="#start">Alessio Amstutz</a>
 
 			<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
 				<span class="nav-toggle-label">Menü</span>
@@ -42,16 +42,21 @@
 		<section id="start" class="section section-hero">
 			<div class="hero-grid">
 				<div class="hero-text">
-					<h1 class="hero-name">Alessio<br><span class="accent-blue">Amstutz</span></h1>
+					<h1 class="hero-name">Alessio<br>Amstutz</h1>
 					<p class="hero-sub">Moderator, Podcaster und Multimedia Producer.</p>
 				</div>
 				<img class="hero-portrait" src="img/AlessioPortrait.jpg" alt="Alessio Amstutz im Porträt">
 			</div>
 		</section>
 
+		<!-- ============ Laufband ============ -->
+		<div class="ticker" aria-hidden="true">
+			<div class="ticker-track"><span>Radio</span><span>Podcast</span><span>Video</span><span>Journalismus</span><span>Moderation</span><span>Radio</span><span>Podcast</span><span>Video</span><span>Journalismus</span><span>Moderation</span></div>
+		</div>
+
 		<!-- ============ Projekte (kommen aus der Datenbank) ============ -->
 		<section id="projekte" class="section section-projekte" aria-labelledby="projekte-label">
-			<p id="projekte-label" class="label label-blue">Projekte</p>
+			<h2 id="projekte-label" class="section-title">Projekte</h2>
 
 			<!-- Wird von js/main.js mit den Daten aus api/projects.php gefüllt -->
 			<div id="projects-grid" class="grid" aria-live="polite">
@@ -60,7 +65,7 @@
 			<noscript><p class="status">Bitte aktiviere JavaScript, um die Projekte zu sehen.</p></noscript>
 
 			<button id="more-btn" class="more-btn" type="button" aria-expanded="false" aria-controls="more-projects" hidden>
-				<span class="more-label">Mehr Projekte ansehen</span>
+				<span class="more-label">Mehr Projekte</span>
 				<span class="more-icon" aria-hidden="true">+</span>
 			</button>
 
@@ -71,7 +76,7 @@
 		<!-- ============ Über mich ============ -->
 		<section id="ueber-mich" class="section section-ueber" aria-labelledby="ueber-label">
 			<div class="ueber-grid">
-				<p id="ueber-label" class="label label-pink">Über mich</p>
+				<h2 id="ueber-label" class="section-title">Über mich</h2>
 				<div>
 					<h2 class="ueber-statement">Ich moderiere Radio und mache Journalismus in Audio und Video.</h2>
 					<p class="ueber-text">Bei SRF Virus und SRF Kids stehe ich am Mikrofon. Dazu studiere ich Multimedia Production an der FH Graubünden (Abschluss 2027) und entwickle eigene Formate, zum Beispiel Amygdala.</p>
@@ -81,9 +86,7 @@
 
 		<!-- ============ Kontakt ============ -->
 		<section id="kontakt" class="section section-kontakt" aria-labelledby="kontakt-label">
-			<p id="kontakt-label" class="label">Kontakt</p>
-			
-			<h2 class="contact-title">Schreib mir.</h2>
+			<h2 id="kontakt-label" class="contact-title">Schreib mir.</h2>
 
 			<!-- Das Formular wird per JavaScript an api/contact.php geschickt und in der Datenbank gespeichert -->
 			<form id="contact-form" class="contact-form" novalidate>
@@ -110,14 +113,14 @@
 				</div>
 
 				<div class="form-actions">
-					<button id="form-submit" class="btn btn-blue" type="submit">Nachricht senden</button>
+					<button id="form-submit" class="btn" type="submit">Nachricht senden</button>
 					<p id="form-status" class="form-status" role="status"></p>
 				</div>
 			</form>
 
 			<div class="buttons">
-				<a class="btn btn-blue" href="https://www.linkedin.com/in/alessio-amstutz-9484432aa" target="_blank" rel="noopener">LinkedIn</a>
-				<a class="btn btn-blue" href="https://www.instagram.com/alessioamstutz/" target="_blank" rel="noopener">Instagram</a>
+				<a class="text-link" href="https://www.linkedin.com/in/alessio-amstutz-9484432aa" target="_blank" rel="noopener">LinkedIn</a>
+				<a class="text-link" href="https://www.instagram.com/alessioamstutz/" target="_blank" rel="noopener">Instagram</a>
 			</div>
 
 	</main>
@@ -126,7 +129,7 @@
 	<footer class="site-footer">
 		<div class="footer-inner">
 			<p>© <span id="year">2026</span> Alessio Amstutz</p>
-			<p>Journalismus · Radio · Video</p>
+			<p>Projekt im Modul Interaktive Medien 5, FH Graubünden</p>
 		</div>
 	</footer>
 

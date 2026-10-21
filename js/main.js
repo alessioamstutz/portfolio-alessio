@@ -130,7 +130,7 @@ function initMoreButton() {
 		const willOpen = moreBtn.getAttribute('aria-expanded') !== 'true';
 		morePanel.hidden = !willOpen;
 		moreBtn.setAttribute('aria-expanded', String(willOpen));
-		moreLabel.textContent = willOpen ? 'Weniger anzeigen' : 'Mehr Projekte ansehen';
+		moreLabel.textContent = willOpen ? 'Weniger anzeigen' : 'Mehr Projekte';
 		moreIcon.textContent = willOpen ? '−' : '+';
 	});
 }

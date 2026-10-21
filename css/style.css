@@ -1,7 +1,10 @@
 /* =========================================================
    Portfolio Alessio Amstutz – Stylesheet
-   Aufbau: 1 Grundlagen · 2 Kopfzeile · 3 Abschnitte
-           4 Projekte · 5 Über mich · 6 Kontakt · 7 Fusszeile
+   Aufbau: 1 Grundlagen · 2 Kopfzeile · 3 Abschnitte · 4 Hero
+           5 Projekte · 6 Über mich · 7 Kontakt · 8 Fusszeile
+   Idee: Jeder Abschnitt hat seine eigene Farbfläche, so wie eine Radiosendung
+   ihr eigenes Jingle hat. Papier (Start, Projekte), Pink (Laufband), Rot (Über mich),
+   Blau (Kontakt), Tinte (Fusszeile).
    ========================================================= */
 
 /* ---------- 1 Grundlagen ---------- */
@@ -21,13 +24,13 @@
 }
 
 :root {
-	/* Farben */
-	--paper: #F5F5F2;
-	--ink: #0A0A0A;
-	--blue: #3636FF;
+	/* Farben (Papier entspricht dem Hintergrund des Porträtfotos) */
+	--paper: #F5F5F5;
+	--ink: #0B0B2E;
+	--blue: #3030FF;
 	--pink: #F02680;
-	--orange: #FF7A1A;
-	--grey: #666666;
+	--red: #FF3B30;
+	--grey: #5C5C70;
 
 	/* Schriften */
 	--font-heading: "Syne", system-ui, sans-serif;
@@ -36,14 +39,16 @@
 	/* Abstände und Breiten */
 	--page-width: 1248px;
 	--page-pad: clamp(1.25rem, 6.7vw, 6rem);
-	--radius: 20px;
+	/* Seitenrand, der den Inhalt mittig hält, während die Farbfläche bis zum Rand reicht */
+	--gutter: max(var(--page-pad), calc((100% - var(--page-width)) / 2 + var(--page-pad)));
+	--radius: 18px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
 	scroll-behavior: smooth;
-	scroll-padding-top: 6rem; /* damit Abschnitte nicht unter der Kopfzeile landen */
+	scroll-padding-top: 5rem; /* damit Abschnitte nicht unter der Kopfzeile landen */
 }
 @media (prefers-reduced-motion: reduce) {
 	html { scroll-behavior: auto; }
@@ -60,7 +65,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3 { margin: 0; font-family: var(--font-heading); font-weight: 800; line-height: 1.1; }
+h1, h2, h3 { margin: 0; font-family: var(--font-heading); font-weight: 800; line-height: 1.08; }
 p { margin: 0; }
 a { color: inherit; }
 
@@ -77,20 +82,17 @@ a { color: inherit; }
 }
 .skip-link:focus { top: 1rem; }
 
-.accent-blue { color: var(--blue); }
-.accent-pink { color: var(--pink); }
-
-.label {
-	margin-bottom: 1.5rem;
-	font-family: var(--font-heading);
-	font-weight: 500;
-	font-size: 0.875rem;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
-	color: var(--grey);
+.section-title {
+	margin-bottom: 2.5rem;
+	font-size: clamp(2.25rem, 5vw, 3.75rem);
+	letter-spacing: -0.02em;
 }
-.label-blue { color: var(--blue); }
-.label-pink { color: var(--pink); }
+/* Marker-Strich hinter dem Titel im Projekte-Abschnitt */
+.section-projekte .section-title {
+	display: inline-block;
+	background: linear-gradient(var(--blue), var(--blue)) no-repeat 0 90% / 100% 0.28em;
+	color: var(--ink);
+}
 
 /* ---------- 2 Kopfzeile (bleibt oben stehen) ---------- */
 .site-header {
@@ -104,53 +106,50 @@ a { color: inherit; }
 	align-items: center;
 	justify-content: space-between;
 	gap: 1.5rem;
-	max-width: var(--page-width);
-	margin-inline: auto;
-	padding: 1.75rem var(--page-pad);
+	padding: 1.25rem var(--gutter);
 }
 .logo {
+	white-space: nowrap;
 	font-family: var(--font-heading);
 	font-weight: 800;
-	font-size: 1.25rem;
-	letter-spacing: 0.04em;
-	text-transform: uppercase;
+	font-size: 1.2rem;
+	letter-spacing: -0.01em;
 	text-decoration: none;
 }
 .site-nav ul {
 	display: flex;
-	gap: 2.5rem;
+	gap: 2rem;
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 .site-nav a {
-	font-family: var(--font-heading);
+	font-family: var(--font-body);
 	font-weight: 600;
-	font-size: 0.95rem;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
+	font-size: 1rem;
 	text-decoration: none;
-	transition: color 0.2s ease;
+	background: linear-gradient(var(--blue), var(--blue)) no-repeat 0 100% / 0 3px;
+	padding-bottom: 0.2rem;
+	transition: background-size 0.2s ease;
 }
 .site-nav a:hover,
-.site-nav a[aria-current="true"] { color: var(--blue); }
+.site-nav a[aria-current="true"] { background-size: 100% 3px; }
 
 .nav-toggle { display: none; }
 
 /* Mobile Navigation: nur wenn JavaScript läuft, sonst bleiben die Links sichtbar */
 @media (max-width: 700px) {
+	.logo { font-size: 1rem; }
 	.js .nav-toggle {
 		display: inline-flex;
-		padding: 0.6rem 1.1rem;
+		padding: 0.55rem 1.1rem;
 		border: 2px solid var(--ink);
-		border-radius: 999px;
+		border-radius: 10px;
 		background: transparent;
 		color: var(--ink);
-		font-family: var(--font-heading);
+		font-family: var(--font-body);
 		font-weight: 600;
-		font-size: 0.85rem;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
+		font-size: 0.95rem;
 		cursor: pointer;
 	}
 	.js .site-nav {
@@ -161,67 +160,103 @@ a { color: inherit; }
 		right: 0;
 		padding: 0.5rem var(--page-pad) 1.5rem;
 		background: var(--paper);
-		border-bottom: 1px solid rgba(10, 10, 10, 0.15);
+		border-bottom: 2px solid var(--ink);
 	}
 	.js .site-nav.is-open { display: block; }
 	.js .site-nav ul { flex-direction: column; gap: 1rem; }
-	.js .site-nav a { font-size: 1.1rem; }
+	.js .site-nav a { font-size: 1.2rem; }
 	.site-nav ul { gap: 1.25rem; }
 }
 
 /* ---------- 3 Abschnitte ---------- */
 .section {
-	max-width: var(--page-width);
-	margin-inline: auto;
-	padding: clamp(3rem, 8vw, 7.5rem) var(--page-pad);
+	padding: clamp(3.5rem, 8vw, 7rem) var(--gutter);
 }
-.section-hero { padding-top: clamp(2rem, 5vw, 5rem); }
+.section-hero { padding-block: clamp(1.5rem, 4vw, 3.5rem) clamp(3.5rem, 8vw, 6rem); }
 
+/* ---------- 4 Hero: Name links, Porträt rechts ---------- */
+.hero-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: center;
+}
 .hero-name {
-	font-size: clamp(3.2rem, 10.5vw, 8rem);
-	line-height: 0.92;
-	letter-spacing: -0.02em;
-	text-transform: uppercase;
+	font-size: clamp(2.8rem, 6.2vw, 5.75rem);
+	line-height: 0.95;
+	letter-spacing: -0.035em;
 }
 .hero-sub {
-	max-width: 36rem;
-	margin: 2rem 0 2.5rem;
-	font-size: 1.375rem;
-	line-height: 1.5;
-	color: var(--grey);
+	max-width: 24rem;
+	margin-top: 1.75rem;
+	padding-left: 1rem;
+	border-left: 6px solid var(--blue);
+	font-size: 1.3rem;
+	line-height: 1.35;
+	font-weight: 500;
 }
-.hero-media {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.hero-portrait {
+	display: block;
 	width: 100%;
-	min-height: clamp(320px, 42vw, 600px);
+	aspect-ratio: 4 / 5;
+	max-height: calc(100vh - 9rem);
 	object-fit: cover;
-	border-radius: var(--radius);
-	background: linear-gradient(135deg, var(--blue), var(--pink));
-	color: #fff;
+	object-position: center top;
 }
-.hero-media p, .tile p {
-	font-size: 0.8rem;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-	opacity: 0.85;
+@media (max-width: 800px) {
+	.hero-grid { grid-template-columns: 1fr; }
+	.hero-name { font-size: 12.5vw; }
+	.hero-portrait { max-height: none; }
 }
 
-/* ---------- 4 Projekte ---------- */
+/* ---------- 4b Laufband (pink) ---------- */
+.ticker {
+	overflow: hidden;
+	background: var(--pink);
+	color: var(--ink);
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-size: clamp(1.4rem, 3vw, 2.25rem);
+	letter-spacing: -0.01em;
+	white-space: nowrap;
+}
+.ticker-track {
+	display: flex;
+	width: max-content;
+	padding-block: 0.9rem;
+	animation: ticker 28s linear infinite;
+}
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker span { display: inline-flex; align-items: center; }
+.ticker span::after {
+	content: "";
+	width: 0.45em;
+	height: 0.45em;
+	margin-inline: 1.4rem;
+	background: var(--ink);
+	border-radius: 50%;
+}
+@keyframes ticker { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+	.ticker-track { animation: none; }
+}
+
+/* ---------- 5 Projekte ---------- */
 .grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 1.5rem;
+	gap: 2.5rem 1.75rem;
 }
 .grid[hidden] { display: none; } /* sonst überschreibt "display: grid" das hidden-Attribut */
 .grid-more { margin-top: 2.5rem; }
 .status { grid-column: 1 / -1; color: var(--grey); }
 
 .tile {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: hidden;
 	aspect-ratio: 1 / 1;
 	border-radius: var(--radius);
 	color: #fff;
@@ -229,12 +264,13 @@ a { color: inherit; }
 }
 .tile-blue { background: var(--blue); }
 .tile-pink { background: var(--pink); }
-.tile-orange { background: var(--orange); }
-.tile { position: relative; overflow: hidden; }
+/* Der Name "orange" bleibt, weil die Datenbank ihn speichert; die Farbe ist jetzt Rot */
+.tile-orange { background: var(--red); }
 .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.project:hover .tile { transform: translateY(-4px); }
+.tile p { font-weight: 600; opacity: 0.9; }
+.project:hover .tile { transform: translateY(-5px); }
 
-.project h3 { margin: 1.25rem 0 0.25rem; font-size: 1.5rem; font-weight: 700; }
+.project h3 { margin: 1rem 0 0.15rem; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
 .project h3 a { text-decoration: none; }
 .project h3 a:hover { color: var(--blue); }
 .tag { font-size: 1rem; color: var(--grey); }
@@ -243,153 +279,117 @@ a { color: inherit; }
 	display: inline-flex;
 	align-items: center;
 	gap: 0.75rem;
-	margin-top: 2.5rem;
-	padding: 1.1rem 2.5rem;
-	border: 0;
-	border-radius: 999px;
-	background: var(--blue);
-	color: #fff;
+	margin-top: 3rem;
+	padding: 1rem 1.75rem;
+	border: 2px solid var(--ink);
+	border-radius: 10px;
+	background: transparent;
+	color: var(--ink);
 	font-family: var(--font-heading);
-	font-weight: 600;
-	font-size: 1rem;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 1.05rem;
 	cursor: pointer;
 	transition: background 0.2s ease, color 0.2s ease;
 }
 .more-btn[hidden] { display: none; }
-.more-btn:hover { filter: brightness(1.1); }
+.more-btn:hover { background: var(--ink); color: var(--paper); }
 .more-icon { font-size: 1.25rem; line-height: 1; }
-.more-btn[aria-expanded="true"] {
-	background: transparent;
-	color: var(--blue);
-	box-shadow: inset 0 0 0 2px var(--blue);
-}
 
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
 
-/* ---------- 5 Über mich ---------- */
+/* ---------- 6 Über mich (rote Fläche) ---------- */
+.section-ueber { background: var(--red); }
+.section-ueber :focus-visible { outline-color: var(--ink); }
 .ueber-grid {
 	display: grid;
 	grid-template-columns: 28% 1fr;
 	gap: 2rem;
 }
+.ueber-grid .section-title { margin-bottom: 0; font-size: clamp(1.5rem, 2.4vw, 2rem); letter-spacing: -0.01em; }
 .ueber-statement {
 	margin-bottom: 2rem;
-	font-size: clamp(1.75rem, 3.2vw, 2.5rem);
-	font-weight: 700;
-	line-height: 1.3;
-}
-.ueber-text { max-width: 40rem; font-size: 1.25rem; color: var(--grey); }
-@media (max-width: 800px) { .ueber-grid { grid-template-columns: 1fr; gap: 0; } }
-
-/* ---------- 6 Kontakt ---------- */
-.contact-mail {
-	margin-bottom: 2rem;
-	font-family: var(--font-heading);
+	font-size: clamp(1.75rem, 3.4vw, 2.75rem);
 	font-weight: 800;
-	font-size: clamp(1.4rem, 4.2vw, 3.2rem);
-	line-height: 1.1;
-	letter-spacing: -0.01em;
-	overflow-wrap: break-word;
+	line-height: 1.2;
+	letter-spacing: -0.015em;
 }
-.contact-mail a { color: var(--blue); text-decoration: none; }
-.contact-mail a:hover { text-decoration: underline; text-underline-offset: 0.12em; }
+.ueber-text { max-width: 38rem; font-size: 1.25rem; }
+@media (max-width: 800px) { .ueber-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+/* ---------- 7 Kontakt (blaue Fläche) ---------- */
+.section-kontakt { background: var(--blue); color: #fff; }
+.section-kontakt :focus-visible { outline-color: #fff; }
 
 .contact-title {
-	margin-bottom: 2rem;
-	font-size: clamp(2rem, 6vw, 4.5rem);
-	letter-spacing: -0.01em;
-	color: var(--blue);
+	margin-bottom: 2.5rem;
+	font-size: clamp(3rem, 9vw, 7rem);
+	line-height: 0.95;
+	letter-spacing: -0.035em;
 }
 
-.buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
-.btn {
-	display: inline-block;
-	padding: 1rem 2rem;
-	border-radius: 999px;
-	color: #fff;
-	font-family: var(--font-heading);
-	font-weight: 600;
-	font-size: 1rem;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-	text-decoration: none;
-	transition: filter 0.2s ease;
-}
-button.btn { border: 0; cursor: pointer; }
-.btn:hover { filter: brightness(1.1); }
-.btn:disabled { opacity: 0.6; cursor: wait; }
-.btn-blue { background: var(--blue); }
-.btn-pink { background: var(--pink); }
-
-/* ---------- 6b Kontaktformular ---------- */
-.contact-form { display: grid; gap: 1.25rem; max-width: 40rem; margin-bottom: 2.5rem; }
+.contact-form { display: grid; gap: 1.75rem; max-width: 40rem; margin-bottom: 3rem; }
 .field label {
 	display: block;
-	margin-bottom: 0.4rem;
-	font-family: var(--font-heading);
+	margin-bottom: 0.3rem;
 	font-weight: 600;
-	font-size: 0.875rem;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
+	font-size: 1rem;
 }
 .field input, .field textarea {
 	width: 100%;
-	padding: 0.9rem 1rem;
-	border: 2px solid rgba(10, 10, 10, 0.2);
-	border-radius: 14px;
-	background: #fff;
-	color: inherit;
+	padding: 0.7rem 0;
+	border: 0;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.55);
+	border-radius: 0;
+	background: transparent;
+	color: #fff;
 	font: inherit;
+	font-size: 1.25rem;
 }
-.field input:focus, .field textarea:focus { border-color: var(--blue); outline: none; }
-.field [aria-invalid="true"] { border-color: var(--pink); }
-.field-error { min-height: 0; margin-top: 0.35rem; font-size: 0.9rem; color: #C0125F; }
+.field textarea { height: 8rem; resize: vertical; }
+.field input:focus, .field textarea:focus { border-bottom-color: #fff; outline: none; box-shadow: 0 2px 0 #fff; }
+.field [aria-invalid="true"] { border-bottom-color: #FFC9A0; }
+.field-error { min-height: 0; margin-top: 0.35rem; font-size: 0.95rem; color: #FFD9BC; }
 .hp { position: absolute; left: -9999px; }
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
-.form-status { font-weight: 500; }
-.form-status.is-success { color: #1A7F3C; }
-.form-status.is-error { color: #C0125F; }
+.form-status { font-weight: 600; }
+.form-status.is-success, .form-status.is-error { color: #fff; }
 
-/* ---------- 7 Fusszeile ---------- */
-.site-footer {
-	max-width: var(--page-width);
-	margin-inline: auto;
-	padding: 0 var(--page-pad);
+.btn {
+	display: inline-block;
+	padding: 1rem 1.75rem;
+	border: 0;
+	border-radius: 10px;
+	background: #fff;
+	color: var(--blue);
+	font-family: var(--font-heading);
+	font-weight: 700;
+	font-size: 1.05rem;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.2s ease, color 0.2s ease;
 }
+.btn:hover { background: var(--pink); color: #fff; }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+
+.buttons { display: flex; flex-wrap: wrap; gap: 0.75rem 2.5rem; }
+.text-link {
+	font-family: var(--font-heading);
+	font-weight: 700;
+	font-size: 1.4rem;
+	text-decoration: underline;
+	text-decoration-thickness: 3px;
+	text-underline-offset: 0.2em;
+}
+.text-link:hover { text-decoration-color: var(--pink); }
+
+/* ---------- 8 Fusszeile ---------- */
+.site-footer { background: var(--ink); color: var(--paper); }
 .footer-inner {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	gap: 0.75rem 2rem;
-	padding-block: 2rem 2.5rem;
-	border-top: 1px solid rgba(10, 10, 10, 0.15);
-	font-size: 0.875rem;
-	color: var(--grey);
-}
-
-/* ---------- Hero: Name links, Porträt rechts ---------- */
-.hero-grid {
-	display: grid;
-	grid-template-columns: 1.5fr 1fr;
-	gap: clamp(1.5rem, 4vw, 3rem);
-	align-items: center;
-}
-.hero-grid .hero-name { font-size: clamp(2.2rem, 5.2vw, 4.5rem); }
-.hero-grid .hero-sub { margin: 1.5rem 0 0; }
-.hero-portrait {
-	display: block;
-	width: 100%;
-	aspect-ratio: 4 / 5;
-	max-height: calc(100vh - 10rem);
-	object-fit: cover;
-	object-position: center top;
-	border-radius: var(--radius);
-}
-@media (max-width: 800px) {
-	.hero-grid { grid-template-columns: 1fr; }
-	.hero-grid .hero-name { font-size: 10.5vw; }
-	.hero-portrait { max-height: none; }
+	gap: 0.5rem 2rem;
+	padding: 1.75rem var(--gutter);
+	font-size: 0.95rem;
 }
