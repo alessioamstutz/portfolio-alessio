@@ -415,6 +415,7 @@ html:has(.window[open]) { overflow: hidden; }
 	letter-spacing: -0.015em;
 }
 .ueber-text { max-width: 38rem; font-size: 1.25rem; }
+.ueber-text + .ueber-text { margin-top: 1.1rem; }
 @media (max-width: 800px) { .ueber-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 
 /* ---------- 7 Kontakt (blaue Fläche) ---------- */
