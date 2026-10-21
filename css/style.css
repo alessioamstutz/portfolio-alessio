@@ -191,9 +191,11 @@ a { color: inherit; }
 	padding: 3rem clamp(1.5rem, 3vw, 3rem) 3rem var(--gutter-vw);
 	background: var(--blue);
 	color: #fff;
+	container-type: inline-size; /* damit sich der Name an die Breite der blauen Fläche anpasst */
 }
 .hero-name {
 	font-size: clamp(2.6rem, 5.7vw, 5.75rem);
+	font-size: clamp(2.6rem, 14.5cqw, 6.5rem);
 	line-height: 0.95;
 	letter-spacing: -0.035em;
 }
