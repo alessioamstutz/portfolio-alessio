@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Alessio Amstutz – Moderator, Podcaster und Multimedia Producer</title>
+	<meta name="description" content="Portfolio von Alessio Amstutz: Moderation, Journalismus, Audio und Video.">
+	<meta name="theme-color" content="#F5F5F2">
+
+	<!-- Markiert die Seite als "JavaScript aktiv" (wird für das mobile Menü gebraucht) -->
+	<script>document.documentElement.classList.add('js');</script>
+
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/main.js" defer></script>
+</head>
+<body>
+
+	<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+	<!-- ============ Kopfzeile ============ -->
+	<header class="site-header">
+		<div class="header-inner">
+			<a class="logo" href="#start">A. Amstutz</a>
+
+			<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+				<span class="nav-toggle-label">Menü</span>
+			</button>
+
+			<nav id="site-nav" class="site-nav" aria-label="Hauptnavigation">
+				<ul>
+					<li><a href="#projekte">Projekte</a></li>
+					<li><a href="#ueber-mich">Über mich</a></li>
+					<li><a href="#kontakt">Kontakt</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main">
+
+		<!-- ============ Hero ============ -->
+		<section id="start" class="section section-hero">
+			<div class="hero-grid">
+				<div class="hero-text">
+					<h1 class="hero-name">Alessio<br><span class="accent-blue">Amstutz</span></h1>
+					<p class="hero-sub">Moderator, Podcaster und Multimedia Producer.</p>
+				</div>
+				<img class="hero-portrait" src="img/AlessioPortrait.jpg" alt="Alessio Amstutz im Porträt">
+			</div>
+		</section>
+
+		<!-- ============ Projekte (kommen aus der Datenbank) ============ -->
+		<section id="projekte" class="section section-projekte" aria-labelledby="projekte-label">
+			<p id="projekte-label" class="label label-blue">Projekte</p>
+
+			<!-- Wird von js/main.js mit den Daten aus api/projects.php gefüllt -->
+			<div id="projects-grid" class="grid" aria-live="polite">
+				<p class="status">Projekte werden geladen …</p>
+			</div>
+			<noscript><p class="status">Bitte aktiviere JavaScript, um die Projekte zu sehen.</p></noscript>
+
+			<button id="more-btn" class="more-btn" type="button" aria-expanded="false" aria-controls="more-projects" hidden>
+				<span class="more-label">Mehr Projekte ansehen</span>
+				<span class="more-icon" aria-hidden="true">+</span>
+			</button>
+
+			<!-- Weitere Projekte: zuerst versteckt (hidden), werden per JavaScript eingeblendet -->
+			<div id="more-projects" class="grid grid-more" hidden></div>
+		</section>
+
+		<!-- ============ Über mich ============ -->
+		<section id="ueber-mich" class="section section-ueber" aria-labelledby="ueber-label">
+			<div class="ueber-grid">
+				<p id="ueber-label" class="label label-pink">Über mich</p>
+				<div>
+					<h2 class="ueber-statement">Ich moderiere Radio und mache Journalismus in Audio und Video.</h2>
+					<p class="ueber-text">Bei SRF Virus und SRF Kids stehe ich am Mikrofon. Dazu studiere ich Multimedia Production an der FH Graubünden (Abschluss 2027) und entwickle eigene Formate, zum Beispiel Amygdala.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ============ Kontakt ============ -->
+		<section id="kontakt" class="section section-kontakt" aria-labelledby="kontakt-label">
+			<p id="kontakt-label" class="label">Kontakt</p>
+			
+			<h2 class="contact-title">Schreib mir.</h2>
+
+			<!-- Das Formular wird per JavaScript an api/contact.php geschickt und in der Datenbank gespeichert -->
+			<form id="contact-form" class="contact-form" novalidate>
+				<div class="field">
+					<label for="f-name">Name</label>
+					<input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="err-name">
+					<p id="err-name" class="field-error"></p>
+				</div>
+				<div class="field">
+					<label for="f-email">E-Mail</label>
+					<input id="f-email" name="email" type="email" autocomplete="email" required maxlength="150" aria-describedby="err-email">
+					<p id="err-email" class="field-error"></p>
+				</div>
+				<div class="field">
+					<label for="f-message">Nachricht</label>
+					<textarea id="f-message" name="message" rows="5" required maxlength="3000" aria-describedby="err-message"></textarea>
+					<p id="err-message" class="field-error"></p>
+				</div>
+
+				<!-- Honeypot gegen Spam-Bots: für Menschen unsichtbar -->
+				<div class="hp" aria-hidden="true">
+					<label for="f-website">Website (nicht ausfüllen)</label>
+					<input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+				</div>
+
+				<div class="form-actions">
+					<button id="form-submit" class="btn btn-blue" type="submit">Nachricht senden</button>
+					<p id="form-status" class="form-status" role="status"></p>
+				</div>
+			</form>
+
+			<div class="buttons">
+				<a class="btn btn-blue" href="https://www.linkedin.com/in/alessio-amstutz-9484432aa" target="_blank" rel="noopener">LinkedIn</a>
+				<a class="btn btn-blue" href="https://www.instagram.com/alessioamstutz/" target="_blank" rel="noopener">Instagram</a>
+			</div>
+
+	</main>
+
+	<!-- ============ Fusszeile ============ -->
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p>© <span id="year">2026</span> Alessio Amstutz</p>
+			<p>Journalismus · Radio · Video</p>
+		</div>
+	</footer>
+
+</body>
+</html>

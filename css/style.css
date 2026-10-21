@@ -1,0 +1,395 @@
+/* =========================================================
+   Portfolio Alessio Amstutz – Stylesheet
+   Aufbau: 1 Grundlagen · 2 Kopfzeile · 3 Abschnitte
+           4 Projekte · 5 Über mich · 6 Kontakt · 7 Fusszeile
+   ========================================================= */
+
+/* ---------- 1 Grundlagen ---------- */
+@font-face {
+	font-family: "Syne";
+	src: url("../fonts/syne-latin-wght-normal.woff2") format("woff2");
+	font-weight: 400 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "DM Sans";
+	src: url("../fonts/dm-sans-latin-wght-normal.woff2") format("woff2");
+	font-weight: 100 1000;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	/* Farben */
+	--paper: #F5F5F2;
+	--ink: #0A0A0A;
+	--blue: #3636FF;
+	--pink: #F02680;
+	--orange: #FF7A1A;
+	--grey: #666666;
+
+	/* Schriften */
+	--font-heading: "Syne", system-ui, sans-serif;
+	--font-body: "DM Sans", system-ui, sans-serif;
+
+	/* Abstände und Breiten */
+	--page-width: 1248px;
+	--page-pad: clamp(1.25rem, 6.7vw, 6rem);
+	--radius: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 6rem; /* damit Abschnitte nicht unter der Kopfzeile landen */
+}
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	* { transition: none !important; }
+}
+
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-body);
+	font-size: 1.125rem;
+	line-height: 1.55;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { margin: 0; font-family: var(--font-heading); font-weight: 800; line-height: 1.1; }
+p { margin: 0; }
+a { color: inherit; }
+
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+.skip-link {
+	position: absolute;
+	left: 1rem;
+	top: -4rem;
+	padding: 0.75rem 1rem;
+	background: var(--ink);
+	color: var(--paper);
+	z-index: 100;
+}
+.skip-link:focus { top: 1rem; }
+
+.accent-blue { color: var(--blue); }
+.accent-pink { color: var(--pink); }
+
+.label {
+	margin-bottom: 1.5rem;
+	font-family: var(--font-heading);
+	font-weight: 500;
+	font-size: 0.875rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--grey);
+}
+.label-blue { color: var(--blue); }
+.label-pink { color: var(--pink); }
+
+/* ---------- 2 Kopfzeile (bleibt oben stehen) ---------- */
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: var(--paper);
+}
+.header-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	max-width: var(--page-width);
+	margin-inline: auto;
+	padding: 1.75rem var(--page-pad);
+}
+.logo {
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-size: 1.25rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+.site-nav ul {
+	display: flex;
+	gap: 2.5rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.site-nav a {
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+.site-nav a:hover,
+.site-nav a[aria-current="true"] { color: var(--blue); }
+
+.nav-toggle { display: none; }
+
+/* Mobile Navigation: nur wenn JavaScript läuft, sonst bleiben die Links sichtbar */
+@media (max-width: 700px) {
+	.js .nav-toggle {
+		display: inline-flex;
+		padding: 0.6rem 1.1rem;
+		border: 2px solid var(--ink);
+		border-radius: 999px;
+		background: transparent;
+		color: var(--ink);
+		font-family: var(--font-heading);
+		font-weight: 600;
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+	.js .site-nav {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		padding: 0.5rem var(--page-pad) 1.5rem;
+		background: var(--paper);
+		border-bottom: 1px solid rgba(10, 10, 10, 0.15);
+	}
+	.js .site-nav.is-open { display: block; }
+	.js .site-nav ul { flex-direction: column; gap: 1rem; }
+	.js .site-nav a { font-size: 1.1rem; }
+	.site-nav ul { gap: 1.25rem; }
+}
+
+/* ---------- 3 Abschnitte ---------- */
+.section {
+	max-width: var(--page-width);
+	margin-inline: auto;
+	padding: clamp(3rem, 8vw, 7.5rem) var(--page-pad);
+}
+.section-hero { padding-top: clamp(2rem, 5vw, 5rem); }
+
+.hero-name {
+	font-size: clamp(3.2rem, 10.5vw, 8rem);
+	line-height: 0.92;
+	letter-spacing: -0.02em;
+	text-transform: uppercase;
+}
+.hero-sub {
+	max-width: 36rem;
+	margin: 2rem 0 2.5rem;
+	font-size: 1.375rem;
+	line-height: 1.5;
+	color: var(--grey);
+}
+.hero-media {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	min-height: clamp(320px, 42vw, 600px);
+	object-fit: cover;
+	border-radius: var(--radius);
+	background: linear-gradient(135deg, var(--blue), var(--pink));
+	color: #fff;
+}
+.hero-media p, .tile p {
+	font-size: 0.8rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	opacity: 0.85;
+}
+
+/* ---------- 4 Projekte ---------- */
+.grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+}
+.grid[hidden] { display: none; } /* sonst überschreibt "display: grid" das hidden-Attribut */
+.grid-more { margin-top: 2.5rem; }
+.status { grid-column: 1 / -1; color: var(--grey); }
+
+.tile {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 1 / 1;
+	border-radius: var(--radius);
+	color: #fff;
+	transition: transform 0.25s ease;
+}
+.tile-blue { background: var(--blue); }
+.tile-pink { background: var(--pink); }
+.tile-orange { background: var(--orange); }
+.tile { position: relative; overflow: hidden; }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.project:hover .tile { transform: translateY(-4px); }
+
+.project h3 { margin: 1.25rem 0 0.25rem; font-size: 1.5rem; font-weight: 700; }
+.project h3 a { text-decoration: none; }
+.project h3 a:hover { color: var(--blue); }
+.tag { font-size: 1rem; color: var(--grey); }
+
+.more-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 2.5rem;
+	padding: 1.1rem 2.5rem;
+	border: 0;
+	border-radius: 999px;
+	background: var(--blue);
+	color: #fff;
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: 1rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background 0.2s ease, color 0.2s ease;
+}
+.more-btn[hidden] { display: none; }
+.more-btn:hover { filter: brightness(1.1); }
+.more-icon { font-size: 1.25rem; line-height: 1; }
+.more-btn[aria-expanded="true"] {
+	background: transparent;
+	color: var(--blue);
+	box-shadow: inset 0 0 0 2px var(--blue);
+}
+
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+/* ---------- 5 Über mich ---------- */
+.ueber-grid {
+	display: grid;
+	grid-template-columns: 28% 1fr;
+	gap: 2rem;
+}
+.ueber-statement {
+	margin-bottom: 2rem;
+	font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+	font-weight: 700;
+	line-height: 1.3;
+}
+.ueber-text { max-width: 40rem; font-size: 1.25rem; color: var(--grey); }
+@media (max-width: 800px) { .ueber-grid { grid-template-columns: 1fr; gap: 0; } }
+
+/* ---------- 6 Kontakt ---------- */
+.contact-mail {
+	margin-bottom: 2rem;
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-size: clamp(1.4rem, 4.2vw, 3.2rem);
+	line-height: 1.1;
+	letter-spacing: -0.01em;
+	overflow-wrap: break-word;
+}
+.contact-mail a { color: var(--blue); text-decoration: none; }
+.contact-mail a:hover { text-decoration: underline; text-underline-offset: 0.12em; }
+
+.contact-title {
+	margin-bottom: 2rem;
+	font-size: clamp(2rem, 6vw, 4.5rem);
+	letter-spacing: -0.01em;
+	color: var(--blue);
+}
+
+.buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
+.btn {
+	display: inline-block;
+	padding: 1rem 2rem;
+	border-radius: 999px;
+	color: #fff;
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: 1rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	text-decoration: none;
+	transition: filter 0.2s ease;
+}
+button.btn { border: 0; cursor: pointer; }
+.btn:hover { filter: brightness(1.1); }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+.btn-blue { background: var(--blue); }
+.btn-pink { background: var(--pink); }
+
+/* ---------- 6b Kontaktformular ---------- */
+.contact-form { display: grid; gap: 1.25rem; max-width: 40rem; margin-bottom: 2.5rem; }
+.field label {
+	display: block;
+	margin-bottom: 0.4rem;
+	font-family: var(--font-heading);
+	font-weight: 600;
+	font-size: 0.875rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+.field input, .field textarea {
+	width: 100%;
+	padding: 0.9rem 1rem;
+	border: 2px solid rgba(10, 10, 10, 0.2);
+	border-radius: 14px;
+	background: #fff;
+	color: inherit;
+	font: inherit;
+}
+.field input:focus, .field textarea:focus { border-color: var(--blue); outline: none; }
+.field [aria-invalid="true"] { border-color: var(--pink); }
+.field-error { min-height: 0; margin-top: 0.35rem; font-size: 0.9rem; color: #C0125F; }
+.hp { position: absolute; left: -9999px; }
+.form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+.form-status { font-weight: 500; }
+.form-status.is-success { color: #1A7F3C; }
+.form-status.is-error { color: #C0125F; }
+
+/* ---------- 7 Fusszeile ---------- */
+.site-footer {
+	max-width: var(--page-width);
+	margin-inline: auto;
+	padding: 0 var(--page-pad);
+}
+.footer-inner {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0.75rem 2rem;
+	padding-block: 2rem 2.5rem;
+	border-top: 1px solid rgba(10, 10, 10, 0.15);
+	font-size: 0.875rem;
+	color: var(--grey);
+}
+
+/* ---------- Hero: Name links, Porträt rechts ---------- */
+.hero-grid {
+	display: grid;
+	grid-template-columns: 1.5fr 1fr;
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: center;
+}
+.hero-grid .hero-name { font-size: clamp(2.2rem, 5.2vw, 4.5rem); }
+.hero-grid .hero-sub { margin: 1.5rem 0 0; }
+.hero-portrait {
+	display: block;
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	max-height: calc(100vh - 10rem);
+	object-fit: cover;
+	object-position: center top;
+	border-radius: var(--radius);
+}
+@media (max-width: 800px) {
+	.hero-grid { grid-template-columns: 1fr; }
+	.hero-grid .hero-name { font-size: 10.5vw; }
+	.hero-portrait { max-height: none; }
+}
