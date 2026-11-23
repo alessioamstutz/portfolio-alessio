@@ -432,19 +432,6 @@ html:has(.window[open]) { overflow: hidden; }
 .ueber-text + .ueber-text { margin-top: 1.1rem; }
 @media (max-width: 800px) { .ueber-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 
-/* ---------- Auf der Bühne (dunkle Fläche) ---------- */
-.section-buehne { background: var(--ink); color: #fff; }
-.section-buehne :focus-visible { outline-color: #fff; }
-.buehne-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(0.75rem, 2vw, 1.75rem); }
-.buehne-grid figure { margin: 0; }
-.buehne-grid img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); background: #000; }
-.buehne-grid figure.wide { grid-column: span 2; }
-.buehne-grid figure.wide img { aspect-ratio: auto; height: 100%; object-position: 50% 50%; }
-.buehne-grid figure { display: flex; flex-direction: column; }
-.buehne-grid figure img { flex: 1; min-height: 0; }
-.buehne-grid figcaption { margin-top: 0.7rem; font-size: 0.95rem; opacity: 0.8; }
-@media (max-width: 700px) { .buehne-grid { grid-template-columns: 1fr; } .buehne-grid figure.wide { grid-column: auto; } .buehne-grid figure.wide img { aspect-ratio: 3 / 2; height: auto; } }
-
 /* ---------- 7 Kontakt (blaue Fläche) ---------- */
 .section-kontakt { background: var(--blue); color: #fff; }
 .section-kontakt :focus-visible { outline-color: #fff; }
