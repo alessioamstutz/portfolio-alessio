@@ -214,7 +214,7 @@ a { color: inherit; }
 	height: 100%;
 	min-height: 22rem;
 	object-fit: cover;
-	object-position: 52% 30%;
+	object-position: 50% 35%;
 }
 @media (max-width: 800px) {
 	.hero-grid { grid-template-columns: 1fr; min-height: 0; }
@@ -419,7 +419,7 @@ html:has(.window[open]) { overflow: hidden; }
 }
 .ueber-grid .section-title { grid-column: 1 / -1; }
 .ueber-figure { margin: 0; }
-.ueber-figure img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 50%; border-radius: var(--radius); }
+.ueber-figure img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 49% 0; border-radius: var(--radius); }
 .ueber-grid .section-title { margin-bottom: 0; font-size: clamp(1.5rem, 2.4vw, 2rem); letter-spacing: -0.01em; }
 .ueber-statement {
 	margin-bottom: 2rem;
