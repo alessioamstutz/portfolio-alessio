@@ -43,6 +43,15 @@ function initMenu() {
 /* ---------- 2 Projekte aus der Datenbank ----------
    fetch() ruft api/projects.php auf. Das PHP-Skript liest die Tabelle "projects"
    und antwortet mit JSON. Daraus baut JavaScript für jedes Projekt eine Kachel. */
+/* Texte für die Projekt-Fenster, falls in der Datenbank noch keine Beschreibung steht */
+const PROJECT_TEXTS = {
+ "SRF Virus": "Nach einem Praktikum und mehreren befristeten Verträgen bei SRF Virus arbeite ich dort heute fix, als Moderator und Produzent.",
+ "SRF Kids": "Bei SRF Kids mache ich Radio für das jüngste Publikum von SRF, jeweils samstags und sonntags von 19 bis 20 Uhr auf SRF 1.",
+ "Gras Ahlange": "«Gras ahlange» ist der Podcast von drei jungen Journalist:innen, die alle zwei Wochen den Wahnsinn im Internet einordnen. Wir sprechen über Trends, Memes, KI, Popkultur und alles, was plötzlich auf deinem Feed auftaucht, und versuchen herauszufinden, wieso. Für alle, die chronically online sind und mal wieder mit der Natur reconnecten müssen.\nEin Podcast von und mit Annick Senn, Noa Dibbasey und Alessio Amstutz. Produktion: Cheyenne Mackay.",
+ "Leonie": "Ein Videoporträt über Leonie Köster, entstanden im Bachelorstudium im Modul «Konvergent produzieren». Wir haben sie einen typischen Tag lang mit der Kamera begleitet.",
+ "Kim": "Für die Zürcher Rapperin Kim-G habe ich ein Musikvideo umgesetzt: von der ersten Idee über den Drehtag bis zum finalen Schnitt. Veröffentlicht wurde es auf dem YouTube-Kanal von Din16erTV, ergänzt durch einen Social-Media-Teaser."
+};
+
 async function loadProjects() {
 	const grid = document.querySelector('#projects-grid');
 	const morePanel = document.querySelector('#more-projects');
@@ -52,6 +61,7 @@ async function loadProjects() {
 		const response = await fetch('api/projects.php', { headers: { Accept: 'application/json' } });
 		if (!response.ok) throw new Error('Serverantwort: ' + response.status);
 		const { projects } = await response.json();
+		projects.forEach((p) => { if (!p.description) { const k = Object.keys(PROJECT_TEXTS).find((key) => p.title.includes(key)); if (k) p.description = PROJECT_TEXTS[k]; } });
 
 		grid.replaceChildren(); // "Projekte werden geladen …" entfernen
 
