@@ -202,8 +202,6 @@ a { color: inherit; }
 .hero-sub {
 	max-width: 26rem;
 	margin-top: 2rem;
-	padding-left: 1rem;
-	border-left: 6px solid #fff;
 	font-size: 1.45rem;
 	line-height: 1.35;
 	font-weight: 500;
@@ -510,3 +508,19 @@ html:has(.window[open]) { overflow: hidden; }
 	padding: 1.75rem var(--gutter);
 	font-size: 0.95rem;
 }
+
+/* ---- Intro-Vorhang (Vorschlag) ---- */
+.intro { position: fixed; inset: 0; z-index: 200; background: var(--blue); color: #fff; display: grid; align-items: center; padding-inline: var(--page-pad, 2rem); animation: introLift .9s cubic-bezier(.77,0,.18,1) 2.1s forwards; }
+.intro-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3rem, 10.5vw, 11rem); line-height: .95; white-space: nowrap; }
+.intro-name .line { display: block; overflow: hidden; padding-bottom: .08em; }
+.intro-name .line span { display: inline-block; transform: translateY(110%); animation: introLetter .7s cubic-bezier(.2,.8,.2,1) forwards; }
+.intro-name .line:nth-child(1) span:nth-child(n) { animation-delay: calc(.12s + var(--i) * .06s); }
+.intro-name .line:nth-child(2) span:nth-child(n) { animation-delay: calc(.5s + var(--i) * .06s); }
+@keyframes introLetter { to { transform: none; } }
+@keyframes introLift { to { transform: translateY(-100%); visibility: hidden; } }
+.hero-portrait { animation: photoFocus 1.8s cubic-bezier(.2,.7,.2,1) 2.1s both; }
+@keyframes photoFocus { from { filter: blur(22px); transform: scale(1.12); } to { filter: blur(0); transform: none; } }
+.hero-text > * { animation: heroIn .9s ease 2.6s both; }
+@keyframes heroIn { from { opacity: 0; transform: translateY(1.2rem); } to { opacity: 1; transform: none; } }
+html.intro-aktiv, html.intro-aktiv body { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .intro { display: none; } .hero-portrait, .hero-text > * { animation: none; } }

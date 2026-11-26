@@ -281,3 +281,13 @@ function initScrollSpy() {
 
 	sections.forEach((s) => observer.observe(s));
 }
+
+/* Intro-Vorhang: Buchstaben nummerieren, Scrollen sperren bis der Vorhang oben ist */
+(() => {
+	const intro = document.querySelector('.intro');
+	if (!intro || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+	intro.querySelectorAll('.line').forEach((line) => line.querySelectorAll('span').forEach((s, i) => s.style.setProperty('--i', i)));
+	document.documentElement.classList.add('intro-aktiv');
+	setTimeout(() => document.documentElement.classList.remove('intro-aktiv'), 3000);
+	setTimeout(() => intro.remove(), 3200);
+})();
